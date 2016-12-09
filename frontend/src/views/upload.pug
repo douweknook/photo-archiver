@@ -1,0 +1,30 @@
+html
+head
+	- var title = 'Home'
+	include ./templates/head.pug
+
+body
+	main
+		include ./templates/nav.pug
+		div.row
+			div#header.col.s12.m12.l12.valign-wrapper
+				div.section.valign.center-block
+					form#formData(enctype="multipart/form-data")
+						div.row
+							div.file-field.input-field
+								div.btn
+									span Pick Files
+									input(type="file" name="files" multiple)
+								div.file-path-wrapper
+									input.file-path.validate(type="text", placeholder="Upload one or more files")
+
+						div.row
+							button.btn.waves-effect.waves-light.right#upload Upload files
+
+
+
+	footer
+
+
+	include ./templates/scripts.pug
+			

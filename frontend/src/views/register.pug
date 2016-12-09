@@ -1,0 +1,42 @@
+html
+head
+	- var title = 'Home'
+	include ./templates/head.pug
+
+body
+	main
+		div.row
+			div#header.col.s12.m12.l12.valign-wrapper
+				div.valign.center-block
+					div.width
+						div.row
+							div.message
+						form
+							div.row
+								div.input-field.col.s12.m12.l12
+									input(type="text" id="username" class="validate" required)
+									label Username
+							
+							div.row
+								div.input-field.col.s12.m6.l6
+									input(type="password" id="password" class="validate" required)
+									label Password
+
+
+								div.input-field.col.s12.m6.l6
+									input(type="password" id="confirm_password" class="validate" required)
+									label Confirm Password
+
+							div.row
+								div.input-field.col.s12.m12.l12
+									input(type="email" id="email" class="validate" required)
+									label E-mail address
+
+							div.row
+								button.btn.waves-effect.waves-light.right#register Register Account
+	
+	footer
+
+
+	include ./templates/scripts.pug
+			

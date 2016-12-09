@@ -1,0 +1,23 @@
+html
+head
+	- var title = 'Home'
+	include ./templates/head.pug
+
+body
+	main
+		include ./templates/nav.pug
+		div.row
+			div#header.col.s12.m12.l12.valign-wrapper
+				div.section.valign.center-block
+					form
+						div.row
+							div.input-field
+								input(type="text" placeholder="Type to search...")
+								label Search your archive
+
+
+	footer
+
+
+	include ./templates/scripts.pug
+			

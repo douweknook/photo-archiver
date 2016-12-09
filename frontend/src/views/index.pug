@@ -1,0 +1,44 @@
+html
+head
+	- var title = 'Home'
+	include ./templates/head.pug
+
+body
+	main
+		div.row
+			div#header.col.s12.m12.l12.valign-wrapper
+				h1.valign.center-block.text Photo Archiver
+
+		div#home.row
+			div.col.s12.m8.l8
+				div.container
+					p.flow-text Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					| tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					| quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					| consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					| cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					| proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+			div.col.s12.m4.l4
+				div.container
+					form
+						div.row
+							div.input-field.col.s12.m12.l12
+								label Username
+								input(type="text" id="username" class="validate")
+								
+						div.row
+							div.input-field.col.s12.m12.l12
+								input(type="password" id="password" class="validate")
+								label Password
+
+						div.row
+							button.btn.waves-effect.waves-light.right#login(type="submit") Log In
+						div.row
+							p.right Got no account? #[a(href="/register.html") Click here] to register.
+
+	footer
+
+
+	include ./templates/scripts.pug
