@@ -4,20 +4,18 @@ head
 	include ./templates/head.pug
 
 body
-	main
+	main#search
 		include ./templates/nav.pug
-		div.row
-			div#header.col.s12.m12.l12.valign-wrapper
-				div.section.valign.center-block
-					form
+		div#head.row.nomargin-bottom.valign-wrapper
+			div#searchbar.col.s12.m12.l12
+				div.section.valign
+					form#formData.center-block(onkeypress="return event.keyCode != 13;")
 						div.row
 							div.input-field
-								input(type="text" placeholder="Type to search...")
+								input(type="text" id="search-input" placeholder="Type to search..." autocomplete="off")
 								label Search your archive
 
-
-	footer
-
-
+				div.row#columns
+	
 	include ./templates/scripts.pug
 			

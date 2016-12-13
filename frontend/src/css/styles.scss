@@ -1,30 +1,171 @@
-$background-color: #F3FFCF;
+// Color palette
+$color1: #0F1626;
+$color2: #AB987A;
+$color3: #FF533D;
+$color4: #F5F5F5;
+
+@import url('https://fonts.googleapis.com/css?family=Days+One|Raleway');
+$font1: 'Raleway', sans-serif;
+$font2: 'Days One', sans-serif;
 
 #header {
-	height: 100%;
-	background-color: $background-color;
+	height: 100vh;
+	background-color: $color4;
+	h1 {
+		color: $color1;
+		font-family: $font2;
+	}
+	h3 {
+		font-family: $font1;
+		color: $color3;
+	} 
+	h6 {
+		font-family: $font1;
+		color: $color3;
+		position: absolute;
+		top: 0;
+		width: 100vw;
+		a {
+			color: $color1;
+		}
+		a:hover, 
+		a:active, 
+		a:focus {
+			color: $color3
+		}
+	}	
 }
 
-#head-register {
-	background-color: $background-color;
+#head-login,
+#head-register,
+#head {
+	height: 100vh;
+	background-color: $color4;
+}
+
+.form-title {
+	font-family: $font2;
+	color: $color3;
+}
+
+.input-field input:focus:not([readonly]) + label {
+	color: $color3;
+}
+
+.input-field input:focus:not([readonly]),
+.input-field input.valid:not([readonly]),
+.input-field input.invalid:not([readonly]) {
+	border-bottom: 1px solid $color3;
+	box-shadow: 0 1px 0 0 $color3;
+}
+
+button.form-button,
+button.form-button:hover,
+button.form-button:active,
+button.form-button:focus,
+.btn-color,
+.btn-color:hover,
+.btn-color:active,
+.btn-color:focus {
+	background-color: $color3;
+}
+
+a#register-url,
+a:hover#register-url,
+a:active#register-url,
+a:focus#register-url,
+a#login-url,
+a:hover#login-url,
+a:active#login-url,
+a:focus#login-url {
+	color: $color3;
+}
+
+.nomargin-bottom {
+	margin-bottom: 0;
 }
 
 #home {
 	height: 250px;
 }
 
-.text {
-	color: #697060;
+.message p {
+	text-align: center;
 }
 
-.message {
-	padding-left: 10px;
-}
-
-.center-block {
+#formData {
 	width: 500px;
 }
 
 #nav {
 	top: 15px;
+}
+
+#nav.active {
+	top: 0px;
+}
+
+.nav-main-color {
+	background-color: $color3 !important;
+}
+
+.nav-link-divider {
+	border-right: 1px solid $color4;
+	height: 80% !important;
+	margin-top: 5 !important;
+	a {
+		margin-top: -5;
+	}
+}
+
+#nav-links li {
+	border-right: 1px solid $color1;
+}
+
+#search {
+	background-color: $color4;
+}
+
+.search-active {
+	position: absolute;
+	top: 50px;
+	width: 100%;
+}
+
+#columns {
+	display: hidden;
+	position: absolute;
+	margin: 0px 15px;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 3;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+	column-count: 3;
+	column-gap: 15px;
+	column-fill: auto;
+}
+
+.card {
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	margin: 0 2px 15px;
+}
+
+@media (max-width: 480px) {
+	#columns {
+		-webkit-column-count: 1;
+		-moz-column-count: 1;
+		column-count: 1;
+	}
+}
+
+@media (min-width: 960px) {
+	#columns {
+		-webkit-column-count: 4;
+		-moz-column-count: 4;
+		column-count: 4;
+	}
 }

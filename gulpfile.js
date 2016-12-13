@@ -6,6 +6,15 @@ const concat		= require('gulp-concat')
 const watch 		= require('gulp-watch')
 const notify 		= require('gulp-notify')
 
+// Error handling
+function swallowError (error) {
+
+  // Details of the error in the console
+  console.log( error.toString() )
+
+  this.emit( 'end' )
+}
+
 const paths = {
 	source: {
 		root: 	__dirname,
@@ -32,6 +41,7 @@ gulp.task( 'default', () => {
 gulp.task('css', () => {
 	return gulp.src(paths.source.styles)
 	.pipe( sass() )
+	.on( 'error', swallowError )
 	.pipe( concat('styles.css') )
 	.pipe( gulp.dest( paths.build.styles ) )
 })
@@ -52,12 +62,14 @@ gulp.task('js', () => {
 	.pipe( babel({
 		presets: ['es2015']
 	}) )
+	.on( 'error', swallowError )
 	.pipe( gulp.dest( paths.build.js ) )
 })
 
 gulp.task('pug', () => {
 	return gulp.src( paths.source.pug )
 	.pipe( pug() )
+	.on( 'error', swallowError )
 	.pipe( gulp.dest( paths.build.html ) )
 })
 

@@ -1,8 +1,12 @@
-div.fixed-action-btn.horizontal.click-to-toggle#nav
-  a.btn-floating.btn-large.teal
-    i.material-icons menu
-  ul
-    li: a.btn-floating.teal(href='/'): i.material-icons home
-    li: a.btn-floating.teal(href='/upload.html'): i.material-icons file_upload
-    li: a.btn-floating.teal(href='/search.html'): i.material-icons search
-    li: a.btn-floating.teal(href='/account.html'): i.material-icons person
+div.fixed-action-btn.toolbar#nav
+	a.btn-floating.btn-large.nav-main-color
+		i.large.material-icons menu
+	ul
+		li.waves-effect.waves-light.nav-link-divider
+			a.btn-floating(href='/') Home
+		li.waves-effect.waves-light.nav-link-divider
+			a.btn-floating(href='/upload.html') Upload Images
+		li.waves-effect.waves-light.nav-link-divider
+			a.btn-floating(href='/search.html') Search
+		li.waves-effect.waves-light
+			a.btn-floating(href='/account.html') Account

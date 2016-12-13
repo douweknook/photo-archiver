@@ -5,13 +5,13 @@ head
 
 body
 	main
-		div.row
-			div#header.col.s12.m12.l12.valign-wrapper
+		div.row.nomargin-bottom
+			div#head-register.col.s12.m12.l12.valign-wrapper
 				div.valign.center-block
-					div.width
-						div.row
-							div.message
 						form
+							h3.center-align.form-title Register
+							div.row
+								div.message
 							div.row
 								div.input-field.col.s12.m12.l12
 									input(type="text" id="username" class="validate" required)
@@ -22,7 +22,6 @@ body
 									input(type="password" id="password" class="validate" required)
 									label Password
 
-
 								div.input-field.col.s12.m6.l6
 									input(type="password" id="confirm_password" class="validate" required)
 									label Confirm Password
@@ -32,11 +31,10 @@ body
 									input(type="email" id="email" class="validate" required)
 									label E-mail address
 
+							div.row.center-align
+								button#register.form-button.btn.waves-effect.waves-light Register Account
 							div.row
-								button.btn.waves-effect.waves-light.right#register Register Account
-	
-	footer
-
+								p.center Already got an account? #[a#login-url(href="/login.html") Click here] to log in.
 
 	include ./templates/scripts.pug
 			

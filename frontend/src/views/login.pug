@@ -1,0 +1,28 @@
+html
+head
+	- var title = 'Home'
+	include ./templates/head.pug
+
+body
+	main
+		div.row.nomargin-bottom
+			div#head-login.col.s12.m12.l12.valign-wrapper
+				div.valign.center-block 
+					form
+						h3.center-align.form-title Log In
+						div.row
+							div.input-field.col.s12.m12.l12
+								input(type="text" id="username" class="validate")
+								label Username
+								
+						div.row
+							div.input-field.col.s12.m12.l12
+								input(type="password" id="password" class="validate")
+								label Password
+
+						div.row.center-align
+							button#login.btn.waves-effect.waves-light.form-button(type="submit") Log In
+						div.row
+							p.center Got no account? #[a#register-url(href="/register.html") Click here] to register.
+
+	include ./templates/scripts.pug

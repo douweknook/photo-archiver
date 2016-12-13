@@ -78,14 +78,14 @@ router.post('/register', (req, res) => {
 	 		res.status(500).send( {error: 'Username or email already in use.'} )
 	 	})
 	})
-	
 })
 
+// Check if user is logged in
 router.post('/authenticate', (req, res) => {
 	if (req.session.user) {
-		res.send(true)
+		res.status(200).send(true)
 	} else {
-		res.send(false)
+		res.status(200).send(false)
 	}
 })
 
