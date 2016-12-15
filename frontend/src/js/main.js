@@ -1,71 +1,45 @@
 $(document).ready( () => {
-	// $.ajax({
-	// 	type: 	'POST',
-	// 	url: 		'/authenticate',
-	// }).done( data => {
-	// 	console.log('data', data)
-	// 	if (data === true) {
-			
-	// 	} else {
-	// 		console.log('User not logged in.')
-	// 	}
-	// })
+	
+	// console.log(authenticate())
 
-	$('#search-input').on('input propertychange', e => { // propertychange to support older IE versions
-		e.preventDefault()
+	if ( document.getElementById('login') ) $('#login').on('click', login)
 
-		if ($('#search-input').val() !== "") {
-			$('#searchbar').addClass('search-active')
-			// Create data model for query
-			let input = { query: $('#search-input').val() }
-			// Send ajax request to search database
-			$.ajax({
-				type: 	'POST',
-				url: 		'/search',
-				data: 	input
-			}).done( results => {
-				// Clear old results
-				console.log(results.length)
-				$('#columns').show()
-				showResults(results)
-			})
-		} else {
-			$('#columns').hide()
-			$('#searchbar').removeClass('search-active')
-		}
-	})
+	if ( document.getElementById('register') ) $('#register').on('click', register)
+
+	if ( document.getElementById('logout') ) {
+		$.ajax({
+			type: 	'POST',
+			url: 	'/logout'
+		})
+	}
+
+	if ( document.getElementById('upload') ) {
+		$('#upload').on('click', upload)
+	}
+
+	if ( document.getElementById('search-input') ) {
+		$('#search-input').on('input propertychange', search)
+	}
+	if ( document.getElementById('logout-message') ) {
+		setTimeout( () => {
+			window.location.href = '/'
+		}, 3000)
+		$.ajax({
+			type: 	'POST',
+			url: 	'/logout'
+		})
+	}
+
 })
 
-function showResults(results) {
-	$('#columns').empty()
-	for (var i = 0; i < results.length; i++) {
-		$('#columns').append(`
-			<div class="card">
-				<div class="card-image">
-					<img src="/uploads/`+ results[i].name + `">
-					<span class="card-title">` + results[i].originalName + `</span>
-				</div>
-				<div class="card-content">
-					<div id="result` + i + `" class="chips chips-initial chips-placeholder"></div>
-				</div>
-				<div class="card-action">
-					<a href="#">This is a link</a>
-				</div>
-			</div>
-		`)
-		getLabels(results[i], i)
-	}
-}
-
-function getLabels(image, i) {
-	let data = []
-	// Get all labels and create tag objects
-	for (let i = 0; i < image.labels.length; i++) {
-		data.push({ tag: image.labels[i].name })
-	}
-	// Add the tag objects and placeholder to chips div
-	$('#result'+i).material_chip({
-		data: data,
-		placeholder: 'Add a tag'
-	})
-}
+// function checkLogin() {
+// 	console.log('checked login')
+// 	console.log(document.cookie)
+// 	if (document.cookie.indexOf('loggedIn') !== -1) {
+// 		console.log('true')
+// 		return true
+// 	} else {
+// 		console.log('false')
+// 		return false
+// 	}
+// }

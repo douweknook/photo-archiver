@@ -1,25 +1,37 @@
 // Require modules
-const bcrypt	= require('bcrypt')
-const express	= require('express')
-const router 	= express.Router()
-const db 		= require(__dirname+'/../modules/database')
+const bcrypt		= require('bcrypt')
+const express		= require('express')
+const router 		= express.Router()
+const db 			= require(__dirname+'/../modules/database')
+
 
 router.post('/login', (req, res) => {
 	if (req.body.username.length === 0 || req.body.password.length === 0) {
 		res.status(400).send( {error: 'Please fill in all fields.'} )
 		return
 	}
-
+	console.log('Login route user: ')
+	console.log( req.session.user )
 	db.User.findOne({
 		where: { username: req.body.username }
 	}).then( user => {
 		if (user) {
+			req.session.debug = 'Mentor'
 			req.session.user = {
 				id: 		user.id, 
 				username: 	user.username, 
 				email: 		user.email
 			}
-			res.status(200).send(req.session.user)
+			req.session.save(err=> {
+				if (err) console.log('Session Err ' + err)
+				console.log('Session after save:')
+				console.log(req.session)
+				res.send( {'test': 'login successful'})
+			})
+			console.log('SESSION SHOULD BE SET')
+			console.log(req.session.user)
+
+			
 		} else {
 			res.status(400).send( {error: 'Username does not exist.'} )
 		}
@@ -27,6 +39,9 @@ router.post('/login', (req, res) => {
 		console.log(error)
 		res.status(500).send( {error: 'Something went wrong. Please try again.'} )
 	})
+})
+router.get('/session', (req, res) => {
+	res.send(req.session)
 })
 
 router.post('/register', (req, res) => {
@@ -80,13 +95,12 @@ router.post('/register', (req, res) => {
 	})
 })
 
-// Check if user is logged in
-router.post('/authenticate', (req, res) => {
-	if (req.session.user) {
-		res.status(200).send(true)
-	} else {
-		res.status(200).send(false)
-	}
+router.post('/logout', (req, res) => {
+	console.log(req.session)
+	req.session.destroy( error => {
+		if (error) throw error
+		res.status(200).send()
+	})
 })
 
 module.exports = router

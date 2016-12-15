@@ -8,14 +8,15 @@ $color4: #F5F5F5;
 $font1: 'Raleway', sans-serif;
 $font2: 'Days One', sans-serif;
 
+h1 {
+	color: $color1;
+	font-family: $font2;
+}
+
 #header {
 	height: 100vh;
 	background-color: $color4;
-	h1 {
-		color: $color1;
-		font-family: $font2;
-	}
-	h3 {
+	h4 {
 		font-family: $font1;
 		color: $color3;
 	} 
@@ -95,6 +96,10 @@ a:focus#login-url {
 
 #formData {
 	width: 500px;
+}
+
+.spinner-layer {
+	border-color: $color3;
 }
 
 #nav {

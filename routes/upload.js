@@ -15,40 +15,44 @@ vision.init( {auth: process.env.GCLOUD_API_KEY} )
 
 // Upload route
 router.post('/upload', upload.array('files'), (req, res) => {
-	console.log(req.files)
-	// TODO: Check if loged in (req.session.user)
-	// TODO: Check if files are .jpg or .png
+	console.log(req.session)
+	if (req.session.user) {
+		// TODO: Check if loged in (req.session.user)
+		// TODO: Check if files are .jpg or .png
 
-	db.Photo.count().then( count => {
-		// Go over each uploaded file
-		req.files.forEach( file => {
-			// Create entry in photos table
-			db.Photo.create({
-				name: 			file.filename,
-				originalName: 	file.originalname,
-				path: 			file.path,
-				mimetype: 		file.mimetype,
-				userId: 		req.session.user.id
-			}).then( photo => {
-				// Set up request to Google Vision API
-				let visionReq = new vision.Request({
-					image: new vision.Image(file.path),
-					features: [ 
-						new vision.Feature('LABEL_DETECTION'), 
-					] 
+		db.Photo.count().then( count => {
+			// Go over each uploaded file
+			req.files.forEach( file => {
+				// Create entry in photos table
+				db.Photo.create({
+					name: 			file.filename,
+					originalName: 	file.originalname,
+					path: 			file.path,
+					mimetype: 		file.mimetype,
+					userId: 		req.session.user.id
+				}).then( photo => {
+					// Set up request to Google Vision API
+					let visionReq = new vision.Request({
+						image: new vision.Image(file.path),
+						features: [ 
+							new vision.Feature('LABEL_DETECTION'), 
+						] 
+					})
+					annotateImage(photo, visionReq)
 				})
-				annotateImage(photo, visionReq)
 			})
-		})
 
-		
-		// Store intervalID to cancel intervals later on
-		let intervalID
-		// Check every 5 seconds if annotation of all images is done
-		intervalID = setInterval( () => {
-			checkUploadStatus(count, req.files.length, res, intervalID)
-		}, 5000 )
-	} )
+			
+			// Store intervalID to cancel intervals later on
+			let intervalID
+			// Check every 5 seconds if annotation of all images is done
+			intervalID = setInterval( () => {
+				checkUploadStatus(count, req.files.length, res, intervalID)
+			}, 5000 )
+		} )
+	} else {
+		res.status(200).send(false)
+	}
 })
 
 // Get annotations for image, store labels in db, connect labels to image.
@@ -86,7 +90,7 @@ function checkUploadStatus(oldCount, amountOfFiles, res, intervalID) {
 		// Compare amounts (same if all are done)
 		if (currentCount === (oldCount + amountOfFiles) ) {
 			// Send reponse status
-			res.status(200).send('done')
+			res.status(200).send('upload successful')
 			// clear intervals
 			clearInterval(intervalID)
 		}

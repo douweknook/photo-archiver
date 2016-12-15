@@ -5,6 +5,9 @@ const babel 		= require('gulp-babel')
 const concat		= require('gulp-concat')
 const watch 		= require('gulp-watch')
 const notify 		= require('gulp-notify')
+const uglify 		= require('gulp-uglify')
+const uglifycss 	= require('gulp-uglifycss')
+const sourcemaps 	= require('gulp-sourcemaps')
 
 // Error handling
 function swallowError (error) {
@@ -40,9 +43,13 @@ gulp.task( 'default', () => {
 
 gulp.task('css', () => {
 	return gulp.src(paths.source.styles)
+	.pipe( sourcemaps.init() )
 	.pipe( sass() )
 	.on( 'error', swallowError )
 	.pipe( concat('styles.css') )
+	.pipe( uglifycss({}) )
+	.on( 'error', swallowError )
+	.pipe( sourcemaps.write('.') )
 	.pipe( gulp.dest( paths.build.styles ) )
 })
  
@@ -58,11 +65,14 @@ gulp.task('img', () => {
 
 gulp.task('js', () => {
 	return gulp.src(paths.source.js) 
+	.pipe( sourcemaps.init() )
 	.pipe( concat('main.js') )
 	.pipe( babel({
 		presets: ['es2015']
 	}) )
 	.on( 'error', swallowError )
+	.pipe( uglify() )
+	.pipe( sourcemaps.write('.') )
 	.pipe( gulp.dest( paths.build.js ) )
 })
 
