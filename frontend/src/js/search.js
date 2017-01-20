@@ -29,16 +29,15 @@ function showResults(results) {
 	$('#columns').empty()
 	for (var i = 0; i < results.length; i++) {
 		$('#columns').append(`
-			<div class="card">
-				<div class="card-image">
-					<img src="/uploads/`+ results[i].name + `" data-id="` + i + `" data-name="` + results[i].name + `">
-					<span class="card-title">` + results[i].originalName + `</span>
-				</div>
-				<div class="card-content">
-					<div id="result` + i + `" class="chips"></div>
-				</div>
-				<div class="card-action">
-					<a href="#">This is a link</a>
+			<div class="card-padding">
+				<div class="card" data-id="` + i + `" data-name="` + results[i].name + `"> 
+					<div class="card-image">
+						<img src="/uploads/`+ results[i].name + `">
+						<span class="card-title" onclick="changeName(this, '` + results[i].name +`', '` + results[i].originalName +`')">` + results[i].originalName + `</span>
+					</div>
+					<div class="card-content">
+						<div id="result` + i + `" class="chips"></div>
+					</div>
 				</div>
 			</div>
 		`)
@@ -80,4 +79,38 @@ function getLabels(image, i) {
 			data: 	{ label: chip.tag, photo: photo }
 		})
   })
+}
+
+function changeName(titleElement, name, originalName) {
+	// Create input element
+	let titleInput = document.createElement('span')
+	titleInput.className = 'card-title'
+	titleInput.innerHTML = `
+		<form><input class="change-title" type="text" name="title" placeholder="Enter new title"><form>
+	`
+	// Add event listener for when new title is submitted
+	titleInput.addEventListener('submit', function(e) {
+		e.preventDefault()
+		// get the new title
+		let newTitle = $('.change-title').val()
+		// TODO: Any title validation?
+
+		// Post new title to server to update in db
+		$.ajax({
+			type: 	'POST',
+			url: 	'/changetitle',
+			data: 	{ 	
+						newTitle: newTitle, 
+						name: name,
+						originalName: originalName
+					}
+		})
+		// After submit, turn input element back to regular title
+		titleElement.innerHTML = newTitle
+		titleInput.parentNode.replaceChild(titleElement, titleInput)
+	})
+	// Replace old title with new input element
+	titleElement.parentNode.replaceChild(titleInput, titleElement)
+	// Set focus on newly added input element
+	$('.change-title').focus()
 }

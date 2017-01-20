@@ -127,7 +127,7 @@ a:focus#login-url {
 	border-right: 1px solid $color1;
 }
 
-#search {
+#background {
 	background-color: $color4;
 }
 
@@ -156,7 +156,10 @@ a:focus#login-url {
 	-webkit-column-break-inside: avoid;
 	-moz-column-break-inside: avoid;
 	column-break-inside: avoid;
-	margin: 0 2px 15px;
+}
+
+.card-padding {
+	padding: 15px 0px;
 }
 
 @media (max-width: 480px) {
@@ -167,10 +170,15 @@ a:focus#login-url {
 	}
 }
 
-@media (min-width: 960px) {
-	#columns {
-		-webkit-column-count: 4;
-		-moz-column-count: 4;
-		column-count: 4;
-	}
+.change-title {
+	font-size: 1em !important;
+	margin-bottom: 0px !important;
 }
+
+/* @media (min-width: 960px) {
+	#columns {
+		-webkit-column-count: 5;
+		-moz-column-count: 5;
+		column-count: 5;
+	}
+} */

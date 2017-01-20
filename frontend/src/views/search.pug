@@ -1,10 +1,10 @@
 html
 head
-	- var title = 'Home'
+	- var title = 'Search'
 	include ./templates/head.pug
 
-body
-	main#search
+body#background
+	main
 		include ./templates/nav.pug
 		div#head.row.nomargin-bottom.valign-wrapper
 			div#searchbar.col.s12.m12.l12
@@ -15,7 +15,7 @@ body
 								input(type="text" id="search-input" placeholder="Type to search..." autocomplete="off")
 								label Search your archive
 
-				div.row#columns
+				div.section#columns
 	
 	include ./templates/scripts.pug
 			

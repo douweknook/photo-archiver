@@ -13,11 +13,10 @@ function upload(e) {
 		contentType: 	false,
 		processData: 	false
 	}).done ( data => {
-		console.log('THIS ONE: ', data)
 		if (data) {
-			// window.location.href = '/search.html'
+			window.location.href = '/search.html'
 		} else {
-			// window.location.href = '/login.html'
+			window.location.href = '/login.html'
 		}
 	}).fail( jqXHR => {
 		console.log(jqXHR)

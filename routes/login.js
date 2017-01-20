@@ -10,28 +10,20 @@ router.post('/login', (req, res) => {
 		res.status(400).send( {error: 'Please fill in all fields.'} )
 		return
 	}
-	console.log('Login route user: ')
-	console.log( req.session.user )
+	
 	db.User.findOne({
 		where: { username: req.body.username }
 	}).then( user => {
 		if (user) {
-			req.session.debug = 'Mentor'
 			req.session.user = {
 				id: 		user.id, 
 				username: 	user.username, 
 				email: 		user.email
 			}
-			req.session.save(err=> {
-				if (err) console.log('Session Err ' + err)
-				console.log('Session after save:')
-				console.log(req.session)
-				res.send( {'test': 'login successful'})
-			})
-			console.log('SESSION SHOULD BE SET')
-			console.log(req.session.user)
+			res.status(200).send('login successful')
 
-			
+			// console.log('SESSION SHOULD BE SET')
+			// console.log(req.session.user)
 		} else {
 			res.status(400).send( {error: 'Username does not exist.'} )
 		}
@@ -96,7 +88,6 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-	console.log(req.session)
 	req.session.destroy( error => {
 		if (error) throw error
 		res.status(200).send()

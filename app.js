@@ -12,23 +12,6 @@ app.use('/', require(__dirname + '/routes/login'))
 app.use('/', require(__dirname + '/routes/upload'))
 app.use('/', require(__dirname + '/routes/search'))
 
-// // Google Vision API test code. Docs: https://github.com/tejitak/node-cloud-vision-api
-// const req = new vision.Request({
-// 	image: new vision.Image('test_image.jpg'),
-// 	features: [ new vision.Feature('LABEL_DETECTION', 10) ]
-// })
-
-// // send single request
-// vision.annotate(req).then((res) => {
-// 	// handling response
-// 	console.log(JSON.stringify(res.responses, null, 2))
-// }, (e) => {
-// 	console.log('Error: ', e)
-// })
-// // Test code tot hier!
-
-
-
 app.listen(8000, () => {
 	console.log('Server listening...')
 })

@@ -15,7 +15,6 @@ vision.init( {auth: process.env.GCLOUD_API_KEY} )
 
 // Upload route
 router.post('/upload', upload.array('files'), (req, res) => {
-	console.log(req.session)
 	if (req.session.user) {
 		// TODO: Check if loged in (req.session.user)
 		// TODO: Check if files are .jpg or .png

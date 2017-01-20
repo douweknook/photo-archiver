@@ -6,13 +6,6 @@ $(document).ready( () => {
 
 	if ( document.getElementById('register') ) $('#register').on('click', register)
 
-	if ( document.getElementById('logout') ) {
-		$.ajax({
-			type: 	'POST',
-			url: 	'/logout'
-		})
-	}
-
 	if ( document.getElementById('upload') ) {
 		$('#upload').on('click', upload)
 	}
